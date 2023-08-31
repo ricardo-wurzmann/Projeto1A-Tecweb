@@ -28,6 +28,10 @@ while True:
         response = response = build_response() + read_file(filepath)
     elif route == '':
         response = index(request)
+    elif route.startswith("delete"):
+        response = delete_note(route)
+    elif route.startswith("edit"):
+        response = edit_note(route)
     else:
         response = build_response()
     
@@ -35,11 +39,7 @@ while True:
         return request.split()[0]
 
     request_method = parse_request_method(request)
-    if request_method == "POST":
-        if route.startswith("/delete"):
-             response = delete_note(route)
-    #     elif route.startswith("/edit"):
-    #         response = edit_note(route)
+
 
     if route == 'POST /create':
         response = create_note(request)

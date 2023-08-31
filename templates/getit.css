@@ -159,13 +159,27 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-bottom: 3.5rem;
+  padding-bottom: 5rem;
   height: 100%;
   box-sizing: border-box;
   font-style: italic;
   font-family: 'Permanent Marker', cursive;
   font-weight: normal;
   color: rgb(85, 82, 82);
+}
+
+.butons{
+  display: flex;
+  margin-left: 0.3rem;
+  flex-direction: row;
+}
+
+.butons2{
+  display: flex;
+  flex-direction: row;
+  margin: 2rem;
+  padding: 0.4rem;
+
 }
 
 .card.card-rotation-1 {

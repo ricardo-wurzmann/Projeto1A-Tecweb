@@ -35,26 +35,6 @@ def load_template(index):
         #return arquivo.read()
     
 def adiciona_nota(anotacao):
-    '''banco = Database(banco)
-    titulo: anotacao[titulo]
-    detalhes: anotacao[detalhes]
-    banco.add(Note(title=titulo, detalhes=detalhes))
-    
-    try:
-        with open('data/notes.json', 'r') as file:
-            data = json.load(file)
-    
-        nova_receita = {
-            "titulo": anotacao["titulo"],
-            "detalhes": anotacao['detalhes']
-        }
-        data.append(nova_receita)
-        with open('data/banco.db', 'w') as file:
-            json.dump(data, file, indent=4) 
-    
-    except Exception as e:
-        print("Ocorreu um erro:", str(e))'''
-
     db = Database('banco')
     titulo = anotacao['titulo']
     detalhes = anotacao['detalhes']
@@ -62,20 +42,8 @@ def adiciona_nota(anotacao):
 
 
 def delete_nota(note_id):
-    try:
-        connection = sqlite3.connect('banco.db')
-        cursor = connection.cursor()
-
-        query = "DELETE FROM note WHERE id = ?;"
-        cursor.execute(query, (note_id,))
-        connection.commit()
-
-        connection.close()
-        return True
-        
-    except Exception as e:
-        print("Ocorreu um erro:", str(e))
-        return False
+    db = Database('banco')
+    db.delete(Note(id=note_id))
 
 def build_response(body='', code=200, reason='OK', headers=''):
     response = f'HTTP/1.1 {code} {reason}\n'

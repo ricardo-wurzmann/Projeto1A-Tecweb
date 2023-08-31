@@ -16,9 +16,9 @@ def index(request):
             
         adiciona_nota(params)
 
-        print('?'*100)
+        #print('?'*100)
         #print(notes_li)
-        print(params)
+        #print(params)
 
         return build_response(code=303, reason='See Other', headers='Location: /')
 
@@ -27,14 +27,14 @@ def index(request):
     #print(note_template)
 
     notes_li = [
-        note_template.format(title=dados.title, details=dados.content)
+        note_template.format(title=dados.title, details=dados.content, id=dados.id)
         for dados in load_data('banco')
     ]
 
     
 
     notes = '\n'.join(notes_li)
-    print(notes)
+    #print(notes)
 
     response_body = load_template('index.html').format(notes=notes)
     return build_response(body=response_body)
@@ -50,18 +50,16 @@ def index(request):
 
 
 def delete_note(route):
-    note_id = int(route.split()[-1])
+    note_id = route[7:]
     db = Database("banco")  # Crie uma instância do Database
-    if db.delete(note_id):
-        db.close_connection()
-        return build_response(code=303, reason="See Other", headers="Location: /")
-    else:
-        db.close_connection()
-        return build_response(code=404, reason="Not Found")
+    db.delete(note_id)
+    return build_response(code=303, reason="See Other", headers="Location: /")
 
 def edit_note(route):
-    note_id = int(route.split()[-1])
+    note_id = route[5:]
     db = Database("banco")  # Crie uma instância do Database
+    db.update(note_id)
+    return build_response(code=303, reason="See Other", headers="Location: /")
 
 
 def create_note(request):

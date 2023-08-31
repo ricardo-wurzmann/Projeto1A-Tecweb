@@ -1,13 +1,14 @@
 <div class="card">
+  <div class="butons">  
     <h3 class="card-title">{title}</h3>
+    <div class="butons2">
+      <a href="delete/{id}"><img src="exluir.png"></a>
+      <a href="edit/{id}"><img src="editar.png"></a>
+    </div> 
+  </div>
     <div class="card-content">
-      <form method="post" action="delete_route">
-        <button class="delete-btn">Excluir</button>
-      </form>
-      <form method="get" action="edit_route">
-        <button class="edit-btn">Editar</button>
-      </form>
       <p>
         {details}
       </p>
+    </div>
 </div>
