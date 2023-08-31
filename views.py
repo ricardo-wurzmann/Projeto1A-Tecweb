@@ -16,17 +16,22 @@ def index(request):
             
         adiciona_nota(params)
 
+        print('?'*100)
+        #print(notes_li)
+        print(params)
+
         return build_response(code=303, reason='See Other', headers='Location: /')
 
     note_template = load_template('components/note.html')
 
+    #print(note_template)
+
     notes_li = [
-        note_template.format(title=dados['titulo'], details=dados['detalhes'])
-        for dados in load_data('notes.json')
+        note_template.format(title=dados.title, details=dados.content)
+        for dados in load_data('banco')
     ]
 
-    print('?'*100)
-    print(notes_li)
+    
 
     notes = '\n'.join(notes_li)
     print(notes)
@@ -70,7 +75,7 @@ def create_note(request):
             params[key] = value
 
         titulo = params.get('titulo')
-        detalhes = params.get('detalhes')
+        detalhes = params.get('details')
 
         # Criar uma nova nota usando a classe Database
         new_note = Note(title=titulo, content=detalhes)

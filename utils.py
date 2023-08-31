@@ -16,6 +16,7 @@ def read_file(caminho):
 def load_data(db):
     data_base = Database(db)
     dic = data_base.get_all()
+    print(dic)
     return dic
     
 def load_template(index):
@@ -34,6 +35,11 @@ def load_template(index):
         #return arquivo.read()
     
 def adiciona_nota(anotacao):
+    '''banco = Database(banco)
+    titulo: anotacao[titulo]
+    detalhes: anotacao[detalhes]
+    banco.add(Note(title=titulo, detalhes=detalhes))
+    
     try:
         with open('data/notes.json', 'r') as file:
             data = json.load(file)
@@ -42,14 +48,18 @@ def adiciona_nota(anotacao):
             "titulo": anotacao["titulo"],
             "detalhes": anotacao['detalhes']
         }
-
         data.append(nova_receita)
-        
-        with open('data/notes.json', 'w') as file:
-            json.dump(data, file, indent=4)  # Corrigido 'ident' para 'indent'
+        with open('data/banco.db', 'w') as file:
+            json.dump(data, file, indent=4) 
     
     except Exception as e:
-        print("Ocorreu um erro:", str(e))
+        print("Ocorreu um erro:", str(e))'''
+
+    db = Database('banco')
+    titulo = anotacao['titulo']
+    detalhes = anotacao['detalhes']
+    db.add(Note(title=titulo, content=detalhes))
+
 
 def delete_nota(note_id):
     try:

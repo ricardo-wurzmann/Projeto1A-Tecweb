@@ -34,15 +34,15 @@ while True:
     def parse_request_method(request):
         return request.split()[0]
 
-    # request_method = parse_request_method(request)
-    # if request_method == "POST":
-    #     if route.startswith("/delete"):
-    #         response = delete_note(route)
+    request_method = parse_request_method(request)
+    if request_method == "POST":
+        if route.startswith("/delete"):
+             response = delete_note(route)
     #     elif route.startswith("/edit"):
     #         response = edit_note(route)
 
-    # if route == 'POST /create':
-    #     response = create_note(request)
+    if route == 'POST /create':
+        response = create_note(request)
     
     client_connection.sendall(response)
 
